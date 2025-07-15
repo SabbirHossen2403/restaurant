@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazfood - Best Grilled Beef Burgers in Town</title>
+    <meta name="description" content="Fazfood - Best Grilled Beef Burgers in Town">
+    <meta name="author" content="Fazfood Restaurant">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* CSS Variables - Design System */
+:root {
+    --primary: hsl(0, 60%, 35%);
+    --primary-foreground: hsl(0, 0%, 98%);
+    --primary-light: hsl(0, 60%, 45%);
+    
+    --accent: hsl(120, 50%, 45%);
+    --accent-foreground: hsl(0, 0%, 98%);
+    --accent-light: hsl(120, 50%, 55%);
+    --accent-dark: hsl(120, 60%, 35%);
+    
+    --background: hsl(0, 0%, 100%);
+    --background-beige: hsl(42, 78%, 95%);
+    --foreground: hsl(0, 0%, 12%);
+    
+    --muted: hsl(0, 0%, 96%);
+    --muted-foreground: hsl(0, 0%, 45%);
+    
+    --yellow-bright: hsl(48, 100%, 67%);
+    --orange-warm: hsl(25, 95%, 60%);
+    
+    --shadow-soft: 0 4px 6px -1px rgba(139, 69, 19, 0.1), 0 2px 4px -2px rgba(139, 69, 19, 0.1);
+    --shadow-medium: 0 10px 15px -3px rgba(139, 69, 19, 0.1), 0 4px 6px -4px rgba(139, 69, 19, 0.1);
+    --shadow-large: 0 20px 25px -5px rgba(139, 69, 19, 0.1), 0 8px 10px -6px rgba(139, 69, 19, 0.1);
+    --shadow-glow: 0 0 0 1px rgba(34, 139, 34, 0.3), 0 0 30px rgba(34, 139, 34, 0.2);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+.script-text {
+    font-family: 'Dancing Script', cursive;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Header Styles */
+#header {
+    background: transparent;
+    transition: var(--transition-smooth);
+    z-index: 1000;
+    padding: 0;
+}
+
+#header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-medium);
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--yellow-bright);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.scrolled .logo {
+    color: var(--primary);
+}
+
+.nav-link {
+    color: white;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    margin: 0 0.5rem;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.scrolled .nav-link {
+    color: var(--primary);
+}
+
+.scrolled .nav-link:hover {
+    color: var(--accent);
+}
+
+.phone-link {
+    color: white;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.scrolled .phone-link {
+    color: var(--primary);
+}
+
+.cart-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition-smooth);
+}
+
+.scrolled .cart-btn {
+    color: var(--primary);
+}
+
+.cart-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.scrolled .cart-btn:hover {
+    background: var(--background-beige);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--accent);
+    color: var(--accent-foreground);
+    font-size: 0.75rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button Styles */
+.btn-hero {
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: var(--accent-foreground);
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    box-shadow: var(--shadow-large);
+    transition: var(--transition-smooth);
+    font-size: 1.1rem;
+}
+
+.btn-hero:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-order {
+    background: var(--accent);
+    color: var(--accent-foreground);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    transition: var(--transition-smooth);
+}
+
+.btn-order:hover {
+    background: var(--accent-dark);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-add-cart {
+    background: var(--accent);
+    color: var(--accent-foreground);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-add-cart:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.btn-promo {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-promo:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-subscribe {
+    background: var(--accent);
+    color: var(--accent-foreground);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-subscribe:hover {
+    background: var(--accent-dark);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    position: relative;
+    background: url('./images/hero-burger\ \(1\).jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('src/assets/hero-burger.jpg') center/cover no-repeat;
+    z-index: -2;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(160, 82, 45, 0.8));
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.floating-herbs {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.herb {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.herb-1 {
+    top: 0;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.herb-2 {
+    top: 20px;
+    right: 20%;
+    animation-delay: 1s;
+}
+
+.herb-3 {
+    top: -20px;
+    left: 60%;
+    animation-delay: 2s;
+}
+
+.hero-title {
+    margin-bottom: 1.5rem;
+}
+
+.hero-title .script-text {
+    display: block;
+    font-size: 4rem;
+    color: var(--yellow-bright);
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-title .bold-text {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+
+         /* Shopping Cart Sidebar Styles - NEW */
+    .cart-sidebar {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 1050;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .cart-sidebar.open {
+        right: 0;
+    }
+
+    .cart-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .cart-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .cart-item-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        background: #f8f9fa;
+        cursor: pointer;
+    }
+
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .remove-item {
+        color: #dc3545;
+        cursor: pointer;
+    }
+
+/* Category Section */
+.category-section {
+    padding: 5rem 0;
+    background: var(--background-beige);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    color: var(--muted-foreground);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.category-icon {
+    width: 7rem; /* Increased from 5rem */
+    height: 7rem; /* Increased from 5rem */
+    border-radius: 50%;
+    background: white;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    margin: 0 auto 1rem;
+}
+
+.category-icon:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-large);
+}
+
+.category-icon.active {
+    background: var(--yellow-bright);
+    box-shadow: var(--shadow-glow);
+}
+
+.category-emoji {
+    font-size: 3.5rem; /* Increased from 2.5rem */
+    margin-bottom: 0.5rem;
+}
+
+.category-name {
+    font-size: 1rem; /* Increased from 0.9rem */
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+    margin: 0;
+}
+
+.mobile-categories {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.mobile-categories::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-categories .category-icon {
+    flex-shrink: 0;
+}
+
+/* About Section */
+.about-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.about-image-wrapper {
+    position: relative;
+}
+
+.about-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-large);
+    transition: var(--transition-smooth);
+}
+
+.about-image:hover {
+    transform: translateY(-10px);
+}
+
+.floating-icon {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 6rem;
+    height: 6rem;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: var(--shadow-large);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.about-text {
+    color: var(--muted-foreground);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.features-list {
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.feature-item i {
+    color: var(--accent);
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.feature-item span {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* Services Section */
+.services-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.service-card {
+    background: var(--background-beige);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-large);
+}
+
+.service-icon {
+    width: 4rem;
+    height: 4rem;
+    background: white;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: var(--shadow-soft);
+    animation: bounceIn 0.6s ease-out;
+}
+
+.service-icon i {
+    font-size: 2rem;
+    color: var(--accent);
+}
+
+.service-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.service-description {
+    color: var(--muted-foreground);
+    line-height: 1.6;
+}
+
+/* Popular Meals Section */
+.popular-meals-section {
+    padding: 5rem 0;
+    background: var(--background-beige);
+}
+
+.meal-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-smooth);
+    height: 100%;
+}
+
+.meal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-large);
+}
+
+.meal-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.meal-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.meal-card:hover .meal-image {
+    transform: scale(1.05);
+}
+
+.meal-content {
+    padding: 1.5rem;
+}
+
+.meal-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.meal-description {
+    color: var(--muted-foreground);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.meal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meal-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+/* Promo Section */
+.promo-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--primary), #8B0000);
+    color: white;
+}
+
+.promo-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.promo-highlight {
+    color: var(--yellow-bright);
+}
+
+.promo-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.timer-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    min-width: 80px;
+}
+
+.timer-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--yellow-bright);
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.timer-separator {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--yellow-bright);
+}
+
+/* Customer Testimonials Section */
+.testimonials-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.testimonial-slider {
+    margin-top: 3rem;
+}
+
+.testimonial-item {
+    background: var(--background-beige);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 0 1rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.testimonial-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    overflow: hidden;
+    border: 3px solid var(--accent);
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-rating {
+    color: var(--yellow-bright);
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--muted-foreground);
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.testimonial-role {
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 5rem 0;
+    background: var(--background-beige);
+}
+
+.contact-info-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+}
+
+.contact-form {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.form-control {
+    border: 2px solid var(--muted);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+/* Guarantee Section */
+.guarantee-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.guarantee-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.guarantee-header i {
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+.stat-card {
+    text-align: center;
+    background: var(--background-beige);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--muted-foreground);
+    font-weight: 500;
+}
+
+.testimonial-card {
+    background: var(--background-beige);
+    border-radius: 1.5rem;
+    padding: 3rem;
+    text-align: center;
+}
+
+.stars {
+    margin-bottom: 1.5rem;
+}
+
+.stars i {
+    color: var(--yellow-bright);
+    font-size: 2rem;
+    margin: 0 0.2rem;
+}
+
+.testimonial-quote {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.author-avatar {
+    width: 4rem;
+    height: 4rem;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.author-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.author-title {
+    color: var(--muted-foreground);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.newsletter-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.newsletter-subtitle {
+    color: var(--muted-foreground);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-input {
+    border: 2px solid var(--muted);
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.newsletter-input:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+/* Footer Section */
+.footer-section {
+    background: var(--primary);
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+.footer-gallery {
+    margin-bottom: 3rem;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+.footer-title {
+    color: var(--yellow-bright);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+    color: var(--yellow-bright);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.social-link:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.opening-hours {
+    font-size: 0.9rem;
+}
+
+.hour-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.copyright {
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(34, 139, 34, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(34, 139, 34, 0.8), 0 0 30px rgba(34, 139, 34, 0.6);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-bounce-in {
+    animation: bounceIn 0.6s ease-out forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title .script-text {
+        font-size: 3rem;
+    }
+    
+    .hero-title .bold-text {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .about-title {
+        font-size: 2rem;
+    }
+    
+    .promo-title {
+        font-size: 2rem;
+    }
+    
+    .newsletter-title {
+        font-size: 2rem;
+    }
+    
+    .countdown-timer {
+        gap: 0.5rem;
+    }
+    
+    .timer-item {
+        min-width: 60px;
+        padding: 0.5rem;
+    }
+    
+    .timer-number {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-quote {
+        font-size: 1.2rem;
+    }
+    
+    .category-icon {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .category-emoji {
+        font-size: 2.5rem;
+    }
+    
+    .about-image {
+        height: 300px;
+    }
+    
+    .testimonial-item {
+        padding: 1.5rem;
+    }
+}
+
+/* Custom Slick Slider Styles */
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slick-slide {
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    padding: 0 15px;
+}
+
+.slick-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    list-style: none;
+    padding: 0;
+}
+
+.slick-dots li {
+    margin: 0 5px;
+}
+
+.slick-dots button {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--muted-foreground);
+    opacity: 0.5;
+    text-indent: -9999px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.slick-dots button:hover, .slick-dots button:focus {
+    opacity: 0.8;
+}
+
+.slick-dots .slick-active button {
+    background: var(--accent);
+    opacity: 1;
+}
+
+.slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    opacity: 0.8;
+}
+
+.slick-arrow:hover {
+    opacity: 1;
+    background: var(--accent-dark);
+}
+
+.slick-prev {
+    left: -50px;
+}
+
+.slick-next {
+    right: -50px;
+}
+
+@media (max-width: 992px) {
+    .slick-prev {
+        left: -20px;
+    }
+    .slick-next {
+        right: -20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slick-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    .slick-prev {
+        left: -10px;
+    }
+    .slick-next {
+        right: -10px;
+    }
+}
+
+
+
+
+
+</style>
+<body>
+    <!-- Header -->
+    <header id="header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <!-- Logo -->
+                    <a class="navbar-brand logo" href="#home">Fazfood</a>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <!-- Navigation -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#popular-meals">Menu</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        </ul>
+                        
+                        <!-- Right Side Actions -->
+                        <div class="navbar-actions d-flex align-items-center">
+                            <!-- Phone -->
+                            <a href="tel:+1234567890" class="phone-link d-none d-lg-flex align-items-center me-3">
+                                <i class="fas fa-phone me-2"></i>
+                                <span>+1 (234) 567-8900</span>
+                            </a>
+                            
+                           <div class="navbar-actions d-flex align-items-center">
+                            <button class="cart-btn" id="cartBtn">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-badge" id="cartBadge">0</span>
+                            </button>
+                        </div>
+                            <!-- Order Button -->
+                            <button class="btn btn-order d-none d-sm-inline-flex">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row min-vh-100 align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <!-- Floating herbs -->
+                        <div class="floating-herbs">
+                            <span class="herb herb-1">🌿</span>
+                            <span class="herb herb-2">🌱</span>
+                            <span class="herb herb-3">🍃</span>
+                        </div>
+                        
+                        <h1 class="hero-title">
+                            <span class="script-text">Burger</span>
+                            <span class="bold-text">GRILLED BEEF BURGER</span>
+                        </h1>
+                        
+                        <p class="hero-subtitle">
+                            Special hearty burgers are what we're all about at Fazfood.
+                        </p>
+                        
+                        <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="1" 
+                                        data-name="Burger" 
+                                        data-price="12.99" 
+                                        data-img="./images/hero-burger (1).jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Section -->
+    <section id="categories" class="category-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Food Categories</h2>
+                <p class="section-subtitle">Choose from our delicious varieties</p>
+            </div>
+            
+            <!-- Desktop Grid -->
+            <div class="d-none d-md-block">
+                <div class="row justify-content-center">
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="1">
+                        <div class="category-icon">
+                            <div class="category-emoji">🌭</div>
+                            <p class="category-name">Hot Dog</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="2">
+                        <div class="category-icon">
+                            <div class="category-emoji">🍔</div>
+                            <p class="category-name">Burgers</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="3">
+                        <div class="category-icon active">
+                            <div class="category-emoji">🍗</div>
+                            <p class="category-name">Chicken</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="4">
+                        <div class="category-icon">
+                            <div class="category-emoji">🍛</div>
+                            <p class="category-name">Biryani</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="5">
+                        <div class="category-icon">
+                            <div class="category-emoji">🍕</div>
+                            <p class="category-name">Pizza</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="6">
+                        <div class="category-icon">
+                            <div class="category-emoji">🍟</div>
+                            <p class="category-name">Fast Food</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-2 mb-4" data-category="7">
+                        <div class="category-icon">
+                            <div class="category-emoji">🌮</div>
+                            <p class="category-name">Tacos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Horizontal Scroll -->
+            <div class="d-md-none">
+                <div class="mobile-categories">
+                    <div class="category-icon" data-category="1">
+                        <div class="category-emoji">🌭</div>
+                        <p class="category-name">Hot Dog</p>
+                    </div>
+                    <div class="category-icon" data-category="2">
+                        <div class="category-emoji">🍔</div>
+                        <p class="category-name">Burgers</p>
+                    </div>
+                    <div class="category-icon active" data-category="3">
+                        <div class="category-emoji">🍗</div>
+                        <p class="category-name">Chicken</p>
+                    </div>
+                    <div class="category-icon" data-category="4">
+                        <div class="category-emoji">🍛</div>
+                        <p class="category-name">Biryani</p>
+                    </div>
+                    <div class="category-icon" data-category="5">
+                        <div class="category-emoji">🍕</div>
+                        <p class="category-name">Pizza</p>
+                    </div>
+                    <div class="category-icon" data-category="6">
+                        <div class="category-emoji">🍟</div>
+                        <p class="category-name">Fast Food</p>
+                    </div>
+                    <div class="category-icon" data-category="7">
+                        <div class="category-emoji">🌮</div>
+                        <p class="category-name">Tacos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Image Section -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="about-image-wrapper">
+                        <img src="./images/chicken-wrap.jpg" alt="Delicious Chicken Wrap" class="about-image">
+                        <div class="floating-icon">
+                            <span>🥗</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Content Section -->
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2 class="about-title">
+                            We Make the Best <span class="text-gradient">Burger</span> in Your Town
+                        </h2>
+                        
+                        <p class="about-text">
+                            At Fazfood, we're passionate about creating exceptional dining experiences. 
+                            Our commitment to quality ingredients and expert preparation ensures every 
+                            bite is a memorable one.
+                        </p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Local Ingredients</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Fast Delivery</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Hot & Fresh Products</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Affordable Prices</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-order">Learn More About Us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">
+                    Why Choose <span class="text-gradient">Fazfood?</span>
+                </h2>
+                <p class="section-subtitle">
+                    We're committed to providing you with the best dining experience through our exceptional services
+                </p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3 class="service-title">Fast Delivery</h3>
+                        <p class="service-description">
+                            Get your food delivered hot and fresh within 30 minutes or it's free!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="service-title">Quality Food</h3>
+                        <p class="service-description">
+                            Made with premium ingredients and prepared by expert chefs daily.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="service-title">24/7 Service</h3>
+                        <p class="service-description">
+                            We're always open to serve you whenever hunger strikes.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="service-title">Food Safety</h3>
+                        <p class="service-description">
+                            Strict hygiene standards and contactless delivery for your safety.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="service-title">Customer Support</h3>
+                        <p class="service-description">
+                            Our friendly team is here to help you 24/7 with any questions.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="service-title">Premium Experience</h3>
+                        <p class="service-description">
+                            Every meal is crafted to exceed your expectations and delight your taste buds.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Meals Section -->
+    <section id="popular-meals" class="popular-meals-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Most <span class="text-gradient">Popular</span> Meals</h2>
+                <p class="section-subtitle">Discover our customers' favorite dishes</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/fried-chicken.jpg" alt="Crispy Fried Chicken" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Crispy Fried Chicken</h3>
+                            <p class="meal-description">Golden crispy chicken served with our special sauce</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$12.99</span>
+                               <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="2" 
+                                        data-name="Crispy Fried Chicken" 
+                                        data-price="12.99" 
+                                        data-img="./images/fried-chicken.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/gourmet-burger.jpg" alt="Gourmet Beef Burger" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Gourmet Beef Burger</h3>
+                            <p class="meal-description">Premium beef patty with fresh vegetables and cheese</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$15.99</span>
+                                <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="3" 
+                                        data-name="Gourmet Beef Burger" 
+                                        data-price="12.99" 
+                                        data-img="./images/gourmet-burger.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/pizza-slice.jpg" alt="Margherita Pizza" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Margherita Pizza</h3>
+                            <p class="meal-description">Fresh mozzarella, tomatoes, and basil on crispy crust</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$18.99</span>
+                                <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="4" 
+                                        data-name="Margherita Pizza" 
+                                        data-price="12.99" 
+                                        data-img="./images/pizza-slice.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/chicken-tacos.jpg" alt="Spicy Chicken Tacos" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Spicy Chicken Tacos</h3>
+                            <p class="meal-description">Three soft tacos with seasoned chicken and fresh salsa</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$10.99</span>
+                               <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="5" 
+                                        data-name="Spicy Chicken Tacos" 
+                                        data-price="12.99" 
+                                        data-img="./images/chicken-tacos.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/beef-steak.jpg" alt="Grilled Beef Steak" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Grilled Beef Steak</h3>
+                            <p class="meal-description">Tender beef steak grilled to perfection with herbs</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$24.99</span>
+                               <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="6" 
+                                        data-name="Grilled Beef Steak" 
+                                        data-price="12.99" 
+                                        data-img="./images/beef-steak.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/chicken-biryani.jpg" alt="Chicken Biryani" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Chicken Biryani</h3>
+                            <p class="meal-description">Aromatic basmati rice with spiced chicken and herbs</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$16.99</span>
+                                <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="7" 
+                                        data-name="Chicken Biryani" 
+                                        data-price="12.99" 
+                                        data-img="./images/chicken-biryani.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Meal Cards -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/cream-cheese-pasta.jpg" alt="Creamy Cheese Pasta" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Creamy Cheese Pasta</h3>
+                            <p class="meal-description">Pasta with rich creamy cheese sauce and herbs</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$14.99</span>
+                               <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="8" 
+                                        data-name="Creamy Cheese Pasta" 
+                                        data-price="12.99" 
+                                        data-img="./images/cream-cheese-pasta.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/The-Best-Easy-Vegan-Salad-The-Live-In-Kitchen-Featured.jpg" alt="Fresh Veg Salad" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Fresh Veg Salad</h3>
+                            <p class="meal-description">Healthy salad with fresh vegetables and dressing</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$9.99</span>
+                                <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="9" 
+                                        data-name="Fresh Veg Salad" 
+                                        data-price="12.99" 
+                                        data-img="./images/The-Best-Easy-Vegan-Salad-The-Live-In-Kitchen-Featured.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="meal-card">
+                        <div class="meal-image-wrapper">
+                            <img src="./images/Chicken Wings.jpg" alt="Spicy Chicken Wings" class="meal-image">
+                        </div>
+                        <div class="meal-content">
+                            <h3 class="meal-title">Spicy Chicken Wings</h3>
+                            <p class="meal-description">Crispy wings with our signature spicy suce</p>
+                            <div class="meal-footer">
+                                <span class="meal-price">$13.99</span>
+                               <button class="btn btn-add-cart add-to-cart" 
+                                        data-id="10" 
+                                        data-name="Spicy Chicken Wings" 
+                                        data-price="12.99" 
+                                        data-img="./images/Chicken Wings.jpg">
+                                    <i class="fas fa-plus me-2"></i>Add to Cart
+                                </button> 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Section -->
+    <section id="promo" class="promo-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="promo-content">
+                        <h2 class="promo-title">
+                            <span class="promo-highlight">Quesadilla</span> with Tomatoes
+                        </h2>
+                        <p class="promo-description">
+                            Limited time offer! Get our special quesadilla with fresh tomatoes at an amazing price.
+                        </p>
+                        <button class="btn btn-promo">Order Now</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="countdown-timer">
+                        <div class="timer-item">
+                            <span class="timer-number" id="days">95</span>
+                            <span class="timer-label">Days</span>
+                        </div>
+                        <div class="timer-separator">:</div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="hours">16</span>
+                            <span class="timer-label">Hours</span>
+                        </div>
+                        <div class="timer-separator">:</div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="minutes">32</span>
+                            <span class="timer-label">Minutes</span>
+                        </div>
+                        <div class="timer-separator">:</div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="seconds">15</span>
+                            <span class="timer-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Don't just take our word for it. Here's what our happy customers have to say about their Fazfood experience.</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-item">
+                    <div class="testimonial-avatar">
+                        <img src="./images/review/claint.png" alt="Sarah Williams">
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Absolutely amazing! The burger was perfectly grilled and the delivery was lightning fast. Fazfood has become my go-to for quality meals."</p>
+                    <h4 class="testimonial-author">Sarah Williams</h4>
+                    <p class="testimonial-role">Busy Mom</p>
+                </div>
+                
+                <div class="testimonial-item">
+                    <div class="testimonial-avatar">
+                        <img src="./images/review/Image (1).png" alt="Maria Garcia">
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Perfect for busy weeknights! My kids love the pizza and I appreciate the healthy options. Fast delivery and always hot!"</p>
+                    <h4 class="testimonial-author">Maria Garcia</h4>
+                    <p class="testimonial-role">Regular Customer</p>
+                </div>
+                
+                <div class="testimonial-item">
+                    <div class="testimonial-avatar">
+                        <img src="./images/review/Image (2).png" alt="Mike Thompson">
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I've ordered from many places, but Fazfood stands out. Fresh ingredients, great taste, and excellent customer service. Highly recommended!"</p>
+                    <h4 class="testimonial-author">Mike Thompson</h4>
+                    <p class="testimonial-role">Office Worker</p>
+                </div>
+                
+                <div class="testimonial-item">
+                    <div class="testimonial-avatar">
+                        <img src="./images/review/Image (3).png" alt="David Kim">
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Great value for money! The portions are generous and the flavors are outstanding. The countdown deals are a nice bonus too."</p>
+                    <h4 class="testimonial-author">David Kim</h4>
+                    <p class="testimonial-role">Local Resident</p>
+                </div>
+                
+                <div class="testimonial-item">
+                    <div class="testimonial-avatar">
+                        <img src="./images/review/Image (4).png" alt="Emma Davis">
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The chicken wrap was incredible! You can really taste the quality of local ingredients. Plus, the app makes ordering so convenient."</p>
+                    <h4 class="testimonial-author">Emma Davis</h4>
+                    <p class="testimonial-role">University Student</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section id="guarantee" class="guarantee-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="guarantee-header">
+                    <i class="fas fa-award"></i>
+                    <h2 class="section-title">Made Right. Made Especially for You.</h2>
+                    <i class="fas fa-award"></i>
+                </div>
+                <p class="section-subtitle">
+                    Our commitment to excellence drives everything we do. From sourcing the finest ingredients 
+                    to delivering exceptional service, we ensure every meal exceeds your expectations.
+                </p>
+            </div>
+            
+            <!-- Stats -->
+            <div class="row mb-5">
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="stat-card">
+                        <i class="fas fa-map-marker-alt stat-icon"></i>
+                        <div class="stat-number">235+</div>
+                        <div class="stat-label">Cities Served</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-icon"></i>
+                        <div class="stat-number">580+</div>
+                        <div class="stat-label">Satisfied Buyers</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="stat-card">
+                        <i class="fas fa-truck stat-icon"></i>
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Orders Delivered</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="stat-card">
+                        <i class="fas fa-clock stat-icon"></i>
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Customer Support</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial -->
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                
+                <blockquote class="testimonial-quote">
+                    "Fazfood has completely changed my dining experience. The quality is outstanding, 
+                    delivery is lightning fast, and every bite is pure perfection. Highly recommended!"
+                </blockquote>
+                
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨‍🍳</div>
+                    <div class="author-info">
+                        <div class="author-name">Sarah Johnson</div>
+                        <div class="author-title">Food Enthusiast</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have a question, feedback, or want to partner with us? We'd love to hear from you!</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h4>Address</h4>
+                                <p>123 Food Street, Flavor District<br>
+                                Culinary City, FC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567<br>
+                                <small>Available 24/7</small></p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h4>Email</h4>
+                                <p>hello@fazfood.com<br>
+                                <small>We reply within 24 hours</small></p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="contact-info-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 11:00 PM<br>
+                                Saturday: 10:00 AM - 12:00 AM<br>
+                                Sunday: 10:00 AM - 10:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4 class="mb-3">Find Us</h4>
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215373510321!2d-73.9878449241645!3d40.7484409713895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1712345678901!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="contact-form">
+                        <h3 class="mb-4">Send us a Message</h3>
+                        
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="name" class="form-label">Name *</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Your full name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" placeholder="Your phone number">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="email" placeholder="your.email@example.com" required>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <input type="text" class="form-control" id="subject" placeholder="What is this about?" required>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us more about your inquiry..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-order">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="newsletter-title">Join for Hot Offers</h2>
+                    <p class="newsletter-subtitle">Stay updated with newest & biggest food promos.</p>
+                    
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control newsletter-input" placeholder="Enter your email address">
+                            <button class="btn btn-subscribe" type="submit">
+                                <i class="fas fa-paper-plane me-2"></i>Subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="footer" class="footer-section">
+        <div class="container">
+            <!-- Image Gallery -->
+            <div class="footer-gallery mb-5">
+                <div class="row g-2">
+                    <div class="col-4 col-md-2">
+                        <img src="./images/fried-chicken (1).jpg" alt="Food Gallery" class="gallery-image">
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <img src="./images/gourmet-burger.jpg" alt="Food Gallery" class="gallery-image">
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <img src="./images/pizza-slice.jpg" alt="Food Gallery" class="gallery-image">
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <img src="./images/chicken-tacos.jpg" alt="Food Gallery" class="gallery-image">
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <img src="./images/beef-steak.jpg" alt="Food Gallery" class="gallery-image">
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <img src="./images/chicken-biryani.jpg" alt="Food Gallery" class="gallery-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Content -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Fazfood</h5>
+                    <p class="footer-text">
+                        We're passionate about creating exceptional dining experiences with quality ingredients and expert preparation.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#popular-meals">Menu</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Book Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Opening Hours</h5>
+                    <div class="opening-hours">
+                        <div class="hour-item">
+                            <span>Monday - Friday</span>
+                            <span>9:00 AM - 11:00 PM</span>
+                        </div>
+                        <div class="hour-item">
+                            <span>Saturday</span>
+                            <span>10:00 AM - 12:00 AM</span>
+                        </div>
+                        <div class="hour-item">
+                            <span>Sunday</span>
+                            <span>10:00 AM - 10:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">&copy; 2024 Fazfood. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="footer-text">Made with ❤️ for food lovers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+    
+
+                                 <!-- Shopping Cart Sidebar - NEW -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="m-0">Your Cart</h3>
+                <button id="closeCart" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div id="cartItems" class="mb-3">
+                <!-- Cart items will be added here dynamically -->
+                <div class="text-center py-5">
+                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Your cart is empty</p>
+                </div>
+            </div>
+
+            <div class="border-top pt-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Tax (10%):</span>
+                    <span id="cartTax">$0.00</span>
+                </div>
+                <div class="d-flex justify-content-between fw-bold fs-5">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button id="checkoutBtn" class="btn btn-primary w-100 mt-3" disabled>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Slick Slider JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+    $(document).ready(function() {
+        // Header scroll effect
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 50) {
+                $('#header').addClass('scrolled');
+            } else {
+                $('#header').removeClass('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        $('a[href^="#"]').on('click', function(event) {
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 80
+                }, 1000);
+            }
+        });
+
+        // Category selection
+        $('.category-icon').on('click', function() {
+            $('.category-icon').removeClass('active');
+            $(this).addClass('active');
+        });
+
+
+
+        // Newsletter form submission
+        $('.newsletter-form').on('submit', function(e) {
+            e.preventDefault();
+            const email = $('.newsletter-input').val();
+            
+            if (email) {
+                const button = $('.btn-subscribe');
+                const originalText = button.html();
+                
+                button.html('<i class="fas fa-spinner fa-spin me-2"></i>Subscribing...');
+                button.prop('disabled', true);
+                
+                // Simulate API call
+                setTimeout(function() {
+                    button.html('<i class="fas fa-check me-2"></i>Subscribed!');
+                    $('.newsletter-input').val('');
+                    
+                    setTimeout(function() {
+                        button.html(originalText);
+                        button.prop('disabled', false);
+                    }, 2000);
+                }, 1000);
+            }
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const targetDate = new Date('2024-12-31 23:59:59').getTime();
+            const distance = targetDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                $('#days').text(days.toString().padStart(2, '0'));
+                $('#hours').text(hours.toString().padStart(2, '0'));
+                $('#minutes').text(minutes.toString().padStart(2, '0'));
+                $('#seconds').text(seconds.toString().padStart(2, '0'));
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Testimonial slider initialization
+        $('.testimonial-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            responsive: [
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: false
+                    }
+                }
+            ]
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    // Add animation classes based on element type
+                    if (element.classList.contains('category-section')) {
+                        $(element).find('.section-title, .section-subtitle').addClass('animate-fade-in-up');
+                        $(element).find('.category-icon').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('animate-bounce-in');
+                            }, index * 150);
+                        });
+                    }
+                    
+                    if (element.classList.contains('about-section')) {
+                        $(element).find('.about-image-wrapper').addClass('animate-slide-in-left');
+                        $(element).find('.about-content').addClass('animate-slide-in-right');
+                    }
+                    
+                    if (element.classList.contains('services-section')) {
+                        $(element).find('.section-title, .section-subtitle').addClass('animate-fade-in-up');
+                        $(element).find('.service-card').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('animate-fade-in-up');
+                            }, index * 150);
+                        });
+                    }
+                    
+                    if (element.classList.contains('popular-meals-section')) {
+                        $(element).find('.section-title, .section-subtitle').addClass('animate-fade-in-up');
+                        $(element).find('.meal-card').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('animate-fade-in-up');
+                            }, index * 100);
+                        });
+                    }
+                    
+                    if (element.classList.contains('testimonials-section')) {
+                        $(element).find('.section-title, .section-subtitle').addClass('animate-fade-in-up');
+                        $(element).find('.testimonial-item').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('animate-slide-in-left');
+                            }, index * 150);
+                        });
+                    }
+                    
+                    if (element.classList.contains('contact-section')) {
+                        $(element).find('.section-title, .section-subtitle').addClass('animate-fade-in-up');
+                        $(element).find('.contact-info-card').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('animate-slide-in-right');
+                            }, index * 150);
+                        });
+                        $(element).find('.contact-form').addClass('animate-slide-in-left');
+                    }
+                    
+                    if (element.classList.contains('guarantee-section')) {
+                        $(element).find('.section-title, .section-subtitle').addClass('animate-fade-in-up');
+                        $(element).find('.stat-card').each(function(index) {
+                            setTimeout(() => {
+                                $(this).addClass('animate-bounce-in');
+                            }, index * 150);
+                        });
+                        $(element).find('.testimonial-card').addClass('animate-slide-in-left');
+                    }
+                    
+                    if (element.classList.contains('newsletter-section')) {
+                        $(element).find('.newsletter-title, .newsletter-subtitle, .newsletter-form').addClass('animate-fade-in-up');
+                    }
+                    
+                    observer.unobserve(element);
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        $('.category-section, .about-section, .services-section, .popular-meals-section, .testimonials-section, .contact-section, .guarantee-section, .newsletter-section').each(function() {
+            observer.observe(this);
+        });
+
+        // Mobile menu close on link click
+        $('.navbar-nav .nav-link').on('click', function() {
+            $('.navbar-collapse').collapse('hide');
+        });
+
+        // Gallery image hover effect
+        $('.gallery-image').on('mouseenter', function() {
+            $(this).css('transform', 'scale(1.05)');
+        }).on('mouseleave', function() {
+            $(this).css('transform', 'scale(1)');
+        });
+
+        // Parallax effect for hero section
+        $(window).scroll(function() {
+            const scroll = $(window).scrollTop();
+            const rate = scroll * -0.5;
+            $('.hero-background').css('transform', 'translate3d(0, ' + rate + 'px, 0)');
+        });
+
+        // Floating herbs animation
+        $('.herb').each(function(index) {
+            const randomDelay = Math.random() * 2;
+            const randomDuration = 3 + Math.random() * 2;
+            $(this).css({
+                'animation-delay': randomDelay + 's',
+                'animation-duration': randomDuration + 's'
+            });
+        });
+
+        // Service card hover effect
+        $('.service-card').on('mouseenter', function() {
+            $(this).find('.service-icon').addClass('animate-bounce-in');
+        });
+
+        // Meal card image hover effect
+        $('.meal-card').on('mouseenter', function() {
+            $(this).find('.meal-image').css('transform', 'scale(1.05)');
+        }).on('mouseleave', function() {
+            $(this).find('.meal-image').css('transform', 'scale(1)');
+        });
+
+        // Stats counter animation
+        function animateCounter(element, target, duration) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(function() {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (target.toString().includes('+')) {
+                    element.text(Math.floor(current) + '+');
+                } else if (target.toString().includes('/')) {
+                    element.text(target);
+                } else {
+                    element.text(Math.floor(current));
+                }
+            }, 16);
+        }
+
+        // Trigger counter animation when stats come into view
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const statNumber = $(entry.target).find('.stat-number');
+                    const targetText = statNumber.text();
+                    
+                    if (targetText.includes('+')) {
+                        const target = parseInt(targetText.replace('+', ''));
+                        animateCounter(statNumber, target, 2000);
+                    } else if (targetText === '24/7') {
+                        // Keep as is for 24/7
+                    } else {
+                        const target = parseInt(targetText.replace('+', ''));
+                        animateCounter(statNumber, target, 2000);
+                    }
+                    
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        $('.stat-card').each(function() {
+            statsObserver.observe(this);
+        });
+
+        // Social links hover effect
+        $('.social-link').on('mouseenter', function() {
+            $(this).css('transform', 'translateY(-2px)');
+        }).on('mouseleave', function() {
+            $(this).css('transform', 'translateY(0)');
+        });
+
+        // Initialize tooltips if needed
+        if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        }
+
+        // Loading animation for images
+        $('img').on('load', function() {
+            $(this).addClass('loaded');
+        });
+
+        // Add loaded class for images that are already cached
+        $('img').each(function() {
+            if (this.complete) {
+                $(this).addClass('loaded');
+            }
+        });
+    });
+
+
+         // Shopping Cart Functionality - NEW
+        let cart = [];
+        
+        // Open cart sidebar
+        $('#cartBtn').click(function() {
+            $('#cartSidebar').addClass('open');
+            $('#cartOverlay').addClass('active');
+        });
+        
+        // Close cart sidebar
+        $('#closeCart, #cartOverlay').click(function() {
+            $('#cartSidebar').removeClass('open');
+            $('#cartOverlay').removeClass('active');
+        });
+        
+        // Add to cart functionality
+        $('.add-to-cart').click(function() {
+            const id = $(this).data('id');
+            const name = $(this).data('name');
+            const price = parseFloat($(this).data('price'));
+            const img = $(this).data('img');
+            
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    img,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Animate cart badge
+            $('#cartBadge').addClass('bounce');
+            setTimeout(() => {
+                $('#cartBadge').removeClass('bounce');
+            }, 500);
+            
+            // Show success message
+            const toast = `<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header bg-success text-white">
+                        <strong class="me-auto">Added to cart</strong>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${name} has been added to your cart
+                    </div>
+                </div>
+            </div>`;
+            
+            $('body').append(toast);
+            setTimeout(() => {
+                $('.toast').remove();
+            }, 3000);
+        });
+        
+        // Update cart display
+        function updateCart() {
+            // Update cart badge
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            $('#cartBadge').text(totalItems);
+            
+            // Update cart items list
+            const $cartItems = $('#cartItems');
+            
+            if (cart.length === 0) {
+                $cartItems.html(`
+                    <div class="text-center py-5">
+                        <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Your cart is empty</p>
+                    </div>
+                `);
+                $('#checkoutBtn').prop('disabled', true);
+            } else {
+                $cartItems.empty();
+                
+                cart.forEach(item => {
+                    $cartItems.append(`
+                        <div class="cart-item mb-3 p-3 border rounded" data-id="${item.id}">
+                            <div class="d-flex">
+                                <img src="${item.img}" class="cart-item-img me-3" alt="${item.name}">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-1">${item.name}</h6>
+                                        <span class="remove-item"><i class="fas fa-trash"></i></span>
+                                    </div>
+                                    <p class="mb-2">$${item.price.toFixed(2)}</p>
+                                    <div class="d-flex align-items-center">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="text" class="quantity-input mx-2" value="${item.quantity}" readonly>
+                                        <button class="quantity-btn plus">+</button>
+                                        <span class="ms-auto fw-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+                
+                $('#checkoutBtn').prop('disabled', false);
+            }
+            
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.10; // 10% tax
+            const total = subtotal + tax;
+            
+            $('#cartSubtotal').text('$' + subtotal.toFixed(2));
+            $('#cartTax').text('$' + tax.toFixed(2));
+            $('#cartTotal').text('$' + total.toFixed(2));
+        }
+        
+        // Handle quantity changes and item removal
+        $('#cartItems').on('click', '.minus', function() {
+            const $input = $(this).siblings('.quantity-input');
+            let quantity = parseInt($input.val());
+            
+            if (quantity > 1) {
+                quantity -= 1;
+                $input.val(quantity);
+                
+                const itemId = $(this).closest('.cart-item').data('id');
+                const item = cart.find(item => item.id === itemId);
+                item.quantity = quantity;
+                
+                updateCart();
+            }
+        });
+        
+        $('#cartItems').on('click', '.plus', function() {
+            const $input = $(this).siblings('.quantity-input');
+            let quantity = parseInt($input.val());
+            
+            quantity += 1;
+            $input.val(quantity);
+            
+            const itemId = $(this).closest('.cart-item').data('id');
+            const item = cart.find(item => item.id === itemId);
+            item.quantity = quantity;
+            
+            updateCart();
+        });
+        
+        $('#cartItems').on('click', '.remove-item', function() {
+            const itemId = $(this).closest('.cart-item').data('id');
+            cart = cart.filter(item => item.id !== itemId);
+            
+            updateCart();
+        });
+        
+        // Checkout button
+        $('#checkoutBtn').click(function() {
+            alert('Checkout functionality would go here! Total: $' + $('#cartTotal').text());
+        });
+
+        // Smooth scrolling for navigation links
+        $('a[href^="#"]').on('click', function(event) {
+            event.preventDefault();
+            $('html, body').animate({
+                scrollTop: $($(this).attr('href')).offset().top - 80
+            }, 800);
+        });
+
+        // Hero button animation
+        $('.btn-hero').on('mouseenter', function() {
+            $(this).css('transform', 'translateY(-3px)');
+        }).on('mouseleave', function() {
+            $(this).css('transform', 'translateY(0)');
+        });
+
+    </script>
+</body>
+</html>
