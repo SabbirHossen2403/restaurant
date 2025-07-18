@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Pack</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<style>
+    :root {
+  --primary-color2: #ff9f1c;
+  --secondary-color2: #ffbf69;
+  --light-color2: #fffaf2;
+  --dark-color2: #333;
+  --gray-color2: #666;
+  --light-gray2: #f0f0f0;
+  --shadow2: 0 4px 12px rgba(0,0,0,0.1);
+  --transition2: all 0.3s ease;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.menu-section {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.filter-buttons {
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-buttons button {
+  margin: 0;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 30px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  text-transform: capitalize;
+}
+
+.filter-buttons button:hover {
+  background-color: var(--secondary-color);
+}
+
+.filter-buttons .active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin: auto;
+}
+
+.menu-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: var(--transition);
+}
+
+.menu-card:hover img {
+  transform: scale(1.03);
+}
+
+.menu-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+}
+
+.menu-card p {
+  font-size: 0.9rem;
+  color: var(--gray-color);
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.stars {
+  color: #ff9900;
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: var(--primary-color);
+}
+
+.price::before {
+  content: '$';
+  font-size: 0.9rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.cart-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--light-gray);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-btn i {
+  font-size: 0.9rem;
+}
+
+.cart-btn.active,
+.cart-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--light-gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.quantity-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.quantity {
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+}
+
+.badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.cart-summary {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 15px 25px;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 100;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cart-summary:hover {
+  transform: scale(1.05);
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.cart-total {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .menu-items {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  .filter-buttons button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation for added items */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 0.5s ease;
+}
+</style>
+<body>
+  <div class="menu-section">
+    <h2>Our Delicious Menu</h2>
+    <div class="filter-buttons">
+      <button class="filter active" data-category="all">All Items</button>
+      <button class="filter" data-category="mexican">Mexican</button>
+      <button class="filter" data-category="italian">Italian</button>
+      <button class="filter" data-category="japanese">Japanese</button>
+      <button class="filter" data-category="drinks">Drinks</button>
+      <button class="filter" data-category="lunch">Lunch Specials</button>
+    </div>
+
+    <div class="menu-items">
+      <!-- Item 1 -->
+      <div class="menu-card italian">
+        <span class="badge">Chef's Choice</span>
+        <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Pasta">
+        <h3>Creamy Pasta</h3>
+        <p>Handmade pasta with creamy alfredo sauce, mushrooms, and parmesan.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          <span>(124)</span>
+        </div>
+        <div class="price">12.99</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="menu-card italian">
+        <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Fries">
+        <h3>Truffle Fries</h3>
+        <p>Crispy fries tossed with truffle oil, parmesan, and fresh herbs.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <span>(89)</span>
+        </div>
+        <div class="price">8.50</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="menu-card mexican">
+        <span class="badge">Popular</span>
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Shawarma">
+        <h3>Chicken Shawarma</h3>
+        <p>Marinated chicken with garlic sauce, pickles, and fresh veggies in pita.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <span>(215)</span>
+        </div>
+        <div class="price">10.99</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="menu-card japanese">
+        <img src="https://images.unsplash.com/photo-1633321702518-6c49dc3c0d60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fish Curry">
+        <h3>Thai Fish Curry</h3>
+        <p>Fresh fish in coconut curry with lemongrass, kaffir lime, and basil.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          <span>(76)</span>
+        </div>
+        <div class="price">15.50</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="menu-card drinks">
+        <span class="badge">New</span>
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Mojito">
+        <h3>Summer Mojito</h3>
+        <p>Refreshing mint, lime, and soda with your choice of alcohol or mocktail.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <span>(42)</span>
+        </div>
+        <div class="price">7.99</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="menu-card lunch">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Burger">
+        <h3>Gourmet Burger</h3>
+        <p>Angus beef patty with cheddar, bacon, caramelized onions, and special sauce.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <span>(183)</span>
+        </div>
+        <div class="price">11.99</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 7 -->
+      <div class="menu-card mexican">
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Tacos">
+        <h3>Street Tacos</h3>
+        <p>Three corn tortillas with your choice of meat, onions, cilantro and salsa.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          <span>(147)</span>
+        </div>
+        <div class="price">9.99</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 8 -->
+      <div class="menu-card japanese">
+        <span class="badge">Healthy</span>
+        <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Sushi">
+        <h3>Sushi Platter</h3>
+        <p>Chef's selection of 12 pieces nigiri and maki with wasabi and ginger.</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <span>(98)</span>
+        </div>
+        <div class="price">18.99</div>
+        <div class="card-footer">
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-summary">
+    <div class="cart-icon">
+      <i class="fas fa-shopping-cart fa-lg"></i>
+      <span class="cart-count">0</span>
+    </div>
+    <div class="cart-total">$0.00</div>
+  </div>
+
+<script>
+$(document).ready(function() {
+  // Filter functionality
+  $('.filter').click(function() {
+    let category = $(this).data('category');
+    $('.filter').removeClass('active');
+    $(this).addClass('active');
+
+    if (category === 'all') {
+      $('.menu-card').show();
+    } else {
+      $('.menu-card').hide();
+      $('.' + category).show();
+    }
+  });
+
+  // Quantity controls
+  $('.plus').click(function(e) {
+    e.stopPropagation();
+    let quantityElement = $(this).siblings('.quantity');
+    let current = parseInt(quantityElement.text());
+    quantityElement.text(current + 1);
+    updateCartButton($(this).closest('.menu-card'));
+  });
+
+  $('.minus').click(function(e) {
+    e.stopPropagation();
+    let quantityElement = $(this).siblings('.quantity');
+    let current = parseInt(quantityElement.text());
+    if (current > 1) {
+      quantityElement.text(current - 1);
+      updateCartButton($(this).closest('.menu-card'));
+    }
+  });
+
+  // Cart functionality
+  let cart = [];
+  
+  function updateCartButton(card) {
+    let quantity = parseInt(card.find('.quantity').text());
+    let btn = card.find('.cart-btn');
+    
+    if (quantity > 1) {
+      btn.html(`<i class="fas fa-shopping-cart"></i> Add ${quantity}`);
+    } else {
+      btn.html(`<i class="fas fa-shopping-cart"></i> Add`);
+    }
+  }
+
+  $('.cart-btn').click(function() {
+    let card = $(this).closest('.menu-card');
+    let itemId = card.find('h3').text();
+    let price = parseFloat(card.find('.price').text());
+    let quantity = parseInt(card.find('.quantity').text());
+    
+    // Check if item already in cart
+    let existingItem = cart.find(item => item.id === itemId);
+    
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({
+        id: itemId,
+        price: price,
+        quantity: quantity
+      });
+    }
+    
+    // Update UI
+    $(this).addClass('active').html('<i class="fas fa-check"></i> Added').prop('disabled', true);
+    card.addClass('pulse');
+    
+    setTimeout(() => {
+      card.removeClass('pulse');
+    }, 500);
+    
+    updateCartSummary();
+  });
+
+  function updateCartSummary() {
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    $('.cart-count').text(totalItems);
+    $('.cart-total').text('$' + totalPrice.toFixed(2));
+    
+    // Add animation to cart icon when items are added
+    if (totalItems > 0) {
+      $('.cart-icon').addClass('pulse');
+      setTimeout(() => {
+        $('.cart-icon').removeClass('pulse');
+      }, 500);
+    }
+  }
+
+  // Cart summary click
+  $('.cart-summary').click(function() {
+    if (cart.length > 0) {
+      let itemsList = cart.map(item => 
+        `${item.quantity}x ${item.id} - $${(item.price * item.quantity).toFixed(2)}`
+      ).join('\n');
+      
+      alert('Your Cart:\n\n' + itemsList + '\n\nTotal: $' + 
+        cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2));
+    } else {
+      alert('Your cart is empty');
+    }
+  });
+});
+</script>
+</body>
+</html>

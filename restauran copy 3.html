@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Carousel Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 2.5rem;
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-image-container {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.main-image-container:hover img {
+    transform: scale(1.02);
+}
+
+.image-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 20px;
+    padding-top: 40px;
+}
+
+.image-info h2 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.thumbnail-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    flex-grow: 1;
+    scrollbar-width: none; /* Firefox */
+}
+
+.thumbnails::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.thumbnail {
+    min-width: 120px;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail.active {
+    border-color: #4CAF50;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail:hover:not(.active) {
+    transform: scale(1.03);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #45a049;
+}
+
+.nav-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .main-image-container {
+        height: 350px;
+    }
+    
+    .thumbnail {
+        min-width: 80px;
+        height: 60px;
+    }
+}
+</style>
+<body>
+    <div class="container">
+        <h1 class="heading">Featured Carousel Gallery</h1>
+        
+        <div class="gallery-container">
+            <div class="main-image-container">
+                <img id="mainImage" src="" alt="Featured Image">
+                <div class="image-info">
+                    <h2 id="imageTitle"></h2>
+                    <p id="imageDescription"></p>
+                </div>
+            </div>
+            
+            <div class="thumbnail-container">
+                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="thumbnails">
+                    <!-- Thumbnails will be added dynamically -->
+                </div>
+                
+                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      $(document).ready(function() {
+    // Sample data - replace with your actual images and data
+    const galleryData = [
+        {
+            id: 1,
+            title: "Beautiful Landscape",
+            description: "A stunning view of mountains and lakes during sunset.",
+            mainImage: "https://source.unsplash.com/random/800x500/?landscape",
+            thumbnail: "https://source.unsplash.com/random/120x80/?landscape"
+        },
+        {
+            id: 2,
+            title: "City Skyline",
+            description: "Modern city architecture with impressive skyscrapers.",
+            mainImage: "./images/allproducts/gallery-dining.jpg",
+            thumbnail: "./images/allproducts/gallery-dining.jpg"
+        },
+        {
+            id: 3,
+            title: "Ocean Waves",
+            description: "Crystal clear blue water with waves crashing on the shore.",
+            mainImage: "https://source.unsplash.com/random/800x500/?ocean",
+            thumbnail: "https://source.unsplash.com/random/120x80/?ocean"
+        },
+        {
+            id: 4,
+            title: "Forest Path",
+            description: "A peaceful walk through a dense green forest.",
+            mainImage: "https://source.unsplash.com/random/800x500/?forest",
+            thumbnail: "https://source.unsplash.com/random/120x80/?forest"
+        },
+        {
+            id: 5,
+            title: "Desert Sunset",
+            description: "Golden sand dunes under a colorful sunset sky.",
+            mainImage: "https://source.unsplash.com/random/800x500/?desert",
+            thumbnail: "https://source.unsplash.com/random/120x80/?desert"
+        },
+        {
+            id: 6,
+            title: "Mountain Peak",
+            description: "Snow-capped mountains reaching for the clouds.",
+            mainImage: "https://source.unsplash.com/random/800x500/?mountain",
+            thumbnail: "https://source.unsplash.com/random/120x80/?mountain"
+        }
+    ];
+
+    let currentIndex = 0;
+
+    // Initialize the gallery
+    function initGallery() {
+        // Load first image
+        loadImage(currentIndex);
+        
+        // Create thumbnails
+        createThumbnails();
+        
+        // Set up event listeners
+        setupEventListeners();
+    }
+
+    // Load image into main view
+    function loadImage(index) {
+        const item = galleryData[index];
+        $('#mainImage').attr('src', item.mainImage).attr('alt', item.title);
+        $('#imageTitle').text(item.title);
+        $('#imageDescription').text(item.description);
+        
+        // Update active thumbnail
+        $('.thumbnail').removeClass('active');
+        $(`.thumbnail[data-id="${item.id}"]`).addClass('active');
+    }
+
+    // Create all thumbnails
+    function createThumbnails() {
+        const $thumbnails = $('.thumbnails');
+        $thumbnails.empty();
+        
+        galleryData.forEach((item, index) => {
+            const thumbnail = $(`
+                <div class="thumbnail" data-id="${item.id}" data-index="${index}">
+                    <img src="${item.thumbnail}" alt="${item.title}">
+                </div>
+            `);
+            
+            if (index === currentIndex) {
+                thumbnail.addClass('active');
+            }
+            
+            $thumbnails.append(thumbnail);
+        });
+    }
+
+    // Set up all event listeners
+    function setupEventListeners() {
+        // Thumbnail click
+        $(document).on('click', '.thumbnail', function() {
+            const index = $(this).data('index');
+            currentIndex = index;
+            loadImage(currentIndex);
+        });
+        
+        // Next button
+        $('.next-btn').click(function() {
+            if (currentIndex < galleryData.length - 1) {
+                currentIndex++;
+                loadImage(currentIndex);
+                scrollThumbnailIntoView();
+            }
+        });
+        
+        // Prev button
+        $('.prev-btn').click(function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadImage(currentIndex);
+                scrollThumbnailIntoView();
+            }
+        });
+        
+        // Keyboard navigation
+        $(document).keydown(function(e) {
+            if (e.key === 'ArrowRight') {
+                $('.next-btn').click();
+            } else if (e.key === 'ArrowLeft') {
+                $('.prev-btn').click();
+            }
+        });
+    }
+    
+    // Scroll thumbnail into view when navigating with buttons
+    function scrollThumbnailIntoView() {
+        const $activeThumb = $(`.thumbnail[data-index="${currentIndex}"]`);
+        const $thumbnails = $('.thumbnails');
+        const thumbPos = $activeThumb.position().left;
+        const thumbWidth = $activeThumb.outerWidth();
+        const containerWidth = $thumbnails.width();
+        
+        $thumbnails.animate({
+            scrollLeft: thumbPos - (containerWidth / 2) + (thumbWidth / 2)
+        }, 300);
+    }
+
+    // Initialize the gallery
+    initGallery();
+});
+    </script>
+</body>
+</html>

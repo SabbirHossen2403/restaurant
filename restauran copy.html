@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fazfood - Best Grilled Beef Burgers in Town</title>
+    <title>Fazfood </title>
     <meta name="description" content="Fazfood - Best Grilled Beef Burgers in Town">
     <meta name="author" content="Fazfood Restaurant">
     
@@ -17,20 +17,21 @@
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-<style>
+     <style>
+        
     /* CSS Variables - Design System */
 :root {
     --primary: hsl(0, 60%, 35%);
     --primary-foreground: hsl(0, 0%, 98%);
     --primary-light: hsl(0, 60%, 45%);
-    
+     --primary-dark: #ff5252;
     --accent: hsl(120, 50%, 45%);
     --accent-foreground: hsl(0, 0%, 98%);
     --accent-light: hsl(120, 50%, 55%);
@@ -1255,7 +1256,7 @@ body {
 }
 
 /* Custom Slick Slider Styles */
-.slick-slider {
+/* .slick-slider {
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -1291,12 +1292,14 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    
     list-style: none;
     padding: 0;
 }
 
 .slick-dots li {
     margin: 0 5px;
+    
 }
 
 .slick-dots button {
@@ -1305,8 +1308,8 @@ body {
     padding: 0;
     border: none;
     border-radius: 50%;
-    background: var(--muted-foreground);
-    opacity: 0.5;
+    background: var(--muted-foregrore);
+    opacity: 1;
     text-indent: -9999px;
     cursor: pointer;
     transition: var(--transition-smooth);
@@ -1372,13 +1375,101 @@ body {
     .slick-next {
         right: -10px;
     }
+}  */
+/* 
+.popular-meals-slider {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+.popular-meals-slider::-webkit-scrollbar {
+  display: none; 
 }
 
+.popular-meals-slider .meal-card {
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: center;
+}
+.btn-modern {
+  background: linear-gradient(135deg, var(--primary), var(--orange-warm));
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.btn-modern:hover {
+  background: var(--yellow-bright);
+  color: var(--foreground);
+  transform: scale(1.05);
+}
+ */
 
 
+.popular-meals-section {
+    padding: 5rem 0;
+    background: var(--background-beige);
+    overflow: hidden;
+}
 
+.meal-slider {
+    margin: 0 -15px;
+}
 
-</style>
+.meal-slide {
+    padding: 0 15px;
+}
+
+/* Slick Arrow Customization */
+.slick-prev, 
+.slick-next {
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+}
+
+.slick-prev:before, 
+.slick-next:before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--primary);
+}
+
+.slick-prev {
+    left: -50px;
+}
+
+.slick-next {
+    right: -50px;
+}
+
+.slick-prev:before {
+    content: '\f053'; /* Font Awesome left arrow */
+}
+
+.slick-next:before {
+    content: '\f054'; /* Font Awesome right arrow */
+}
+
+/* Slick Dots Customization */
+.slick-dots {
+    bottom: -40px;
+}
+
+.slick-dots li button:before {
+    font-size: 12px;
+    color: var(--primary);
+}
+
+.slick-dots li.slick-active button:before {
+    color: var(--primary-dark);
+}
+
+     </style>
+</head>
+
 <body>
     <!-- Header -->
     <header id="header" class="fixed-top">
@@ -1418,8 +1509,6 @@ body {
                                 <span class="cart-badge" id="cartBadge">0</span>
                             </button>
                         </div>
-                            <!-- Order Button -->
-                            <button class="btn btn-order d-none d-sm-inline-flex">Order Now</button>
                         </div>
                     </div>
                 </div>
@@ -1466,96 +1555,45 @@ body {
     </section>
 
     <!-- Category Section -->
-    <section id="categories" class="category-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Our Food Categories</h2>
-                <p class="section-subtitle">Choose from our delicious varieties</p>
-            </div>
-            
-            <!-- Desktop Grid -->
-            <div class="d-none d-md-block">
-                <div class="row justify-content-center">
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="1">
-                        <div class="category-icon">
-                            <div class="category-emoji">🌭</div>
-                            <p class="category-name">Hot Dog</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="2">
-                        <div class="category-icon">
-                            <div class="category-emoji">🍔</div>
-                            <p class="category-name">Burgers</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="3">
-                        <div class="category-icon active">
-                            <div class="category-emoji">🍗</div>
-                            <p class="category-name">Chicken</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="4">
-                        <div class="category-icon">
-                            <div class="category-emoji">🍛</div>
-                            <p class="category-name">Biryani</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="5">
-                        <div class="category-icon">
-                            <div class="category-emoji">🍕</div>
-                            <p class="category-name">Pizza</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="6">
-                        <div class="category-icon">
-                            <div class="category-emoji">🍟</div>
-                            <p class="category-name">Fast Food</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-2 mb-4" data-category="7">
-                        <div class="category-icon">
-                            <div class="category-emoji">🌮</div>
-                            <p class="category-name">Tacos</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mobile Horizontal Scroll -->
-            <div class="d-md-none">
-                <div class="mobile-categories">
-                    <div class="category-icon" data-category="1">
-                        <div class="category-emoji">🌭</div>
-                        <p class="category-name">Hot Dog</p>
-                    </div>
-                    <div class="category-icon" data-category="2">
-                        <div class="category-emoji">🍔</div>
-                        <p class="category-name">Burgers</p>
-                    </div>
-                    <div class="category-icon active" data-category="3">
-                        <div class="category-emoji">🍗</div>
-                        <p class="category-name">Chicken</p>
-                    </div>
-                    <div class="category-icon" data-category="4">
-                        <div class="category-emoji">🍛</div>
-                        <p class="category-name">Biryani</p>
-                    </div>
-                    <div class="category-icon" data-category="5">
-                        <div class="category-emoji">🍕</div>
-                        <p class="category-name">Pizza</p>
-                    </div>
-                    <div class="category-icon" data-category="6">
-                        <div class="category-emoji">🍟</div>
-                        <p class="category-name">Fast Food</p>
-                    </div>
-                    <div class="category-icon" data-category="7">
-                        <div class="category-emoji">🌮</div>
-                        <p class="category-name">Tacos</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+ 
+
+
+
+
+
+<section id="categories" class="category-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Our Food Categories</h2>
+      <p class="section-subtitle">Choose from our delicious varieties</p>
+    </div>
+    <div class="row justify-content-center g-4"> <!-- spacing added -->
+      <div class="col-auto">
+        <div class="category-icon"><div class="category-emoji">🌭</div><p class="category-name">Hot Dog</p></div>
+      </div>
+      <div class="col-auto">
+        <div class="category-icon"><div class="category-emoji">🍔</div><p class="category-name">Burgers</p></div>
+      </div>
+      <div class="col-auto">
+        <div class="category-icon active"><div class="category-emoji">🍗</div><p class="category-name">Chicken</p></div>
+      </div>
+      <div class="col-auto">
+        <div class="category-icon"><div class="category-emoji">🍛</div><p class="category-name">Biryani</p></div>
+      </div>
+      <div class="col-auto">
+        <div class="category-icon"><div class="category-emoji">🍕</div><p class="category-name">Pizza</p></div>
+      </div>
+      <div class="col-auto">
+        <div class="category-icon"><div class="category-emoji">🍟</div><p class="category-name">Fast Food</p></div>
+      </div>
+      <div class="col-auto">
+        <div class="category-icon"><div class="category-emoji">🌮</div><p class="category-name">Tacos</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
     <!-- About Section -->
     <section id="about" class="about-section">
@@ -2401,6 +2439,8 @@ body {
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Slick Slider JS -->
@@ -2896,6 +2936,36 @@ body {
             $(this).css('transform', 'translateY(0)');
         });
 
+       $(document).ready(function(){
+    $('.meal-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+});
+
+
+  
     </script>
 </body>
 </html>

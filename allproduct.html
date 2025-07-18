@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious - Premium Food Delivery</title>
+    <meta name="description" content="Premium food delivery service with fresh ingredients and authentic flavors" />
+    <meta name="author" content="Delicious Restaurant" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+<style>
+
+:root {
+    --primary-color: #dc3545;
+    --secondary-color: #212529;
+    --accent-color: #ffc107;
+    --light-gray: #f8f9fa;
+    --dark-gray: #6c757d;
+    --border-color: #dee2e6;
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-red: 0 4px 20px rgba(220, 53, 69, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--secondary-color);
+}
+
+/* Header Styles */
+.header-section {
+    background: #fff;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.search-container {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-input {
+    padding-left: 45px;
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    height: 45px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dark-gray);
+}
+
+.results-count {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+.sort-select {
+    width: 180px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.view-toggle {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.view-btn {
+    border: none;
+    background: #fff;
+    color: var(--dark-gray);
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+}
+
+.view-btn.active,
+.view-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Main Content */
+.main-content {
+    padding: 30px 0;
+    background: #fff;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    padding: 0 15px;
+}
+
+.filter-card {
+    background: #fff;
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+.filter-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.filter-title {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.category-item:hover {
+    background: var(--light-gray);
+}
+
+.category-item.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.category-item .count {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.price-filter {
+    margin-top: 10px;
+}
+
+.price-range {
+    margin-bottom: 15px;
+}
+
+.price-labels {
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    margin-top: 10px;
+}
+
+.filter-btn {
+    width: 100%;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+.collections-card {
+    position: relative;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.collections-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.collections-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: #fff;
+    padding: 30px 20px 20px;
+}
+
+.collections-overlay h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: var(--light-gray);
+    color: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.tag:hover {
+    background: var(--border-color);
+}
+
+.tag.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Food Grid Styles */
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 0 15px;
+}
+
+/* New Enhanced Food Card Design */
+.food-card {
+    background: #fff;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    transition: all 0.4s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.food-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-color);
+}
+
+.food-card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.food-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.food-card:hover .food-card-image img {
+    transform: scale(1.1);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary-color);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    z-index: 2;
+}
+
+.food-actions {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.food-card:hover .food-actions {
+  opacity: 1;
+}
+
+/* Common styles for all icons */
+.action-btn {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+/* Hover style */
+.action-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Active style */
+.action-btn.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* Animate each icon with delay */
+.food-card:hover .action-btn:nth-child(1) {
+  opacity: 1;
+  transform: translateX(0); /* from right */
+  transition-delay: 0.2s;
+}
+.food-card .action-btn:nth-child(1) {
+  transform: translateX(40px); /* default off-screen right */
+}
+
+.food-card:hover .action-btn:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+.food-card:hover .action-btn:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+.food-card:hover .action-btn:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+.food-card:hover .action-btn:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+
+.food-card-content {
+    padding: 25px;
+    text-align: center;
+    background: #fff;
+}
+
+.food-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.stars {
+    color: var(--accent-color);
+}
+
+.rating-text {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+.food-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.food-category {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.food-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.add-to-cart {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.food-card:hover .add-to-cart {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.add-to-cart:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Food Gallery Styles */
+.food-gallery {
+    background: #fff;
+    padding: 80px 0;
+}
+
+.food-gallery h2 {
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.gallery-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item {
+    min-width: 25%;
+    padding: 0 10px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.05);
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.gallery-nav:hover {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.gallery-nav.prev {
+    left: 20px;
+}
+
+.gallery-nav.next {
+    right: 20px;
+}
+
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #1a1a1a 100%);
+    color: #fff;
+    padding: 60px 0 20px;
+}
+
+.footer h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.footer p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.footer-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-menu li {
+    margin-bottom: 10px;
+}
+
+.footer-menu a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-menu a:hover {
+    color: var(--primary-color);
+}
+
+.footer-menu a:before {
+    content: "•";
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.recent-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post-item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.post-image {
+    width: 50px;
+    height: 50px;
+    background: rgba(220, 53, 69, 0.2);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.post-content h6 {
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.post-content small {
+    color: #999;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-item i {
+    width: 40px;
+    height: 40px;
+    background: rgba(220, 53, 69, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.contact-item div small {
+    color: #999;
+    display: block;
+}
+
+.contact-item div p {
+    color: #fff;
+    margin: 0;
+    font-weight: 500;
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    margin-top: 40px;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    color: #999;
+    margin: 0;
+}
+
+.footer-link {
+    color: #999;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-color);
+}
+
+/* Pagination Styles */
+.pagination .page-link {
+    color: var(--secondary-color);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    margin: 0 5px;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-section .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .search-container {
+        max-width: 100%;
+    }
+    
+    .food-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .gallery-item {
+        min-width: 50%;
+    }
+    
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .sidebar {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item {
+        min-width: 100%;
+    }
+    
+    .footer .row {
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="row align-items-center py-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container me-4">
+                            <input type="text" class="form-control search-input" id="searchInput" placeholder="Search for food...">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <div class="results-count">
+                            <span id="resultsCount">Showing 1-12 of 24 results</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <div class="d-flex align-items-center me-3">
+                            <span class="me-2">Sort by:</span>
+                            <select class="form-select sort-select" id="sortSelect">
+                                <option value="default">Default</option>
+                                <option value="name">Name</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="btn view-btn active" id="gridView">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="btn view-btn" id="listView">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container-fluid main-content">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4">
+                <div class="sidebar">
+                    <!-- Menu Categories -->
+                    <div class="filter-card mb-4">
+                        <h5 class="filter-title">Menu Categories</h5>
+                        <div class="category-list">
+                            <div class="category-item active" data-category="all">
+                                <span>All Menu</span>
+                                <span class="count">(58)</span>
+                            </div>
+                            <div class="category-item" data-category="burger">
+                                <span>Chicken Burger</span>
+                                <span class="count">(45)</span>
+                            </div>
+                            <div class="category-item" data-category="pizza">
+                                <span>American Pizza</span>
+                                <span class="count">(44)</span>
+                            </div>
+                            <div class="category-item" data-category="vegetable">
+                                <span>Fresh Vegetable</span>
+                                <span class="count">(34)</span>
+                            </div>
+                            <div class="category-item" data-category="seafood">
+                                <span>Sea Foods</span>
+                                <span class="count">(23)</span>
+                            </div>
+                            <div class="category-item" data-category="biryani">
+                                <span>Biryani Recipe</span>
+                                <span class="count">(56)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="filter-card mb-4">
+                        <h5 class="filter-title">Price Filter</h5>
+                        <div class="price-filter">
+                            <div class="price-range">
+                                <input type="range" class="form-range" id="priceRange" min="5" max="300" value="150">
+                                <div class="d-flex justify-content-between price-labels">
+                                    <span>$5</span>
+                                    <span id="currentPrice">$150</span>
+                                    <span>$300</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary filter-btn mt-3">Filter Price</button>
+                        </div>
+                    </div>
+
+                    <!-- Food Collections -->
+                    <div class="filter-card mb-4">
+                        <div class="collections-card">
+                            <img src="./images/allproducts/food-collections.jpg" alt="Food Collections" class="collections-image">
+                            <div class="collections-overlay">
+                                <h5>Foods Collections</h5>
+                                <p>Discover our curated selection</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Popular Tags -->
+                    <div class="filter-card">
+                        <h5 class="filter-title">Popular Tags</h5>
+                        <div class="tags-container">
+                            <span class="tag active">Barbecue</span>
+                            <span class="tag active">Hot Spices</span>
+                            <span class="tag">Beef Pizza</span>
+                            <span class="tag">Sea Foods</span>
+                            <span class="tag">Drinks</span>
+                            <span class="tag">Desserts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food Grid -->
+            <div class="col-lg-9 col-md-8">
+                <div class="food-grid" id="foodGrid">
+                    <!-- Food cards will be generated by JavaScript -->
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Food pagination" class="mt-5">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- Pagination will be generated by JavaScript -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Gallery -->
+    <section class="food-gallery">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Our Food Gallery</h2>
+                <p class="lead">Take a visual journey through our culinary creations</p>
+            </div>
+            <div class="gallery-carousel">
+                <div class="gallery-track" id="galleryTrack">
+                    <!-- Gallery images will be loaded by JavaScript -->
+                </div>
+                <button class="gallery-nav prev" id="galleryPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-nav next" id="galleryNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>About Us</h5>
+                    <p>We are passionate about delivering exceptional culinary experiences with fresh ingredients and authentic flavors.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Best Menus</h5>
+                    <ul class="footer-menu">
+                        <li><a href="#">Barbecue Steak Special</a></li>
+                        <li><a href="#">Gourmet Pizza Collection</a></li>
+                        <li><a href="#">Fresh Seafood Platter</a></li>
+                        <li><a href="#">Chicken Pasta Deluxe</a></li>
+                        <li><a href="#">Vegetarian Specialties</a></li>
+                        <li><a href="#">Dessert Collection</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Recent Post</h5>
+                    <div class="recent-posts">
+                        <div class="post-item">
+                            <div class="post-image"></div>
+                            <div class="post-content">
+                                <h6>New Menu Launch</h6>
+                                <small>December 15, 2024</small>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <div class="post-image"></div>
+                            <div class="post-content">
+                                <h6>Chef's Special Recipe</h6>
+                                <small>December 12, 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Us</h5>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <small>Call us</small>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <small>Email us</small>
+                                <p>info@restaurant.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <small>Visit us</small>
+                                <p>123 Food Street, City</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2024 Restaurant Name. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                        <a href="#" class="footer-link">Terms of Service</a>
+                        <a href="#" class="footer-link">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    <script>
+        // Food Delivery Website JavaScript
+$(document).ready(function() {
+    
+    // Food items data - খাবারের তথ্য
+    const foodItems = [
+        {
+            id: 1,
+            name: 'Barbecue Sauce',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: './images/allproducts/barbecue-steak.jpg',
+            discount: 15,
+            rating: 4.5,
+            isFavorite: true,
+            type: 'barbecue'
+        },
+        {
+            id: 2,
+            name: 'Briff Pizza',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: './images/allproducts/chicken-pasta.jpg',
+            discount: 25,
+            rating: 4.8,
+            isFavorite: false,
+            type: 'pizza'
+        },
+        {
+            id: 3,
+            name: 'Fresh Sea Foods',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: './images/allproducts/chocolate-dessert.jpg',
+            discount: 0,
+            rating: 4.3,
+            isFavorite: false,
+            type: 'seafood'
+        },
+        {
+            id: 4,
+            name: 'Sashimi Fish',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 10,
+            rating: 4.7,
+            isFavorite: false,
+            type: 'seafood'
+        },
+        {
+            id: 5,
+            name: 'Chicken Pasta',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 20,
+            rating: 4.6,
+            isFavorite: false,
+            type: 'pasta'
+        },
+        {
+            id: 6,
+            name: 'Beef Biryani',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 30,
+            rating: 4.9,
+            isFavorite: false,
+            type: 'biryani'
+        },
+        {
+            id: 7,
+            name: 'Natural Vegetable',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 0,
+            rating: 4.2,
+            isFavorite: false,
+            type: 'vegetable'
+        },
+        {
+            id: 8,
+            name: 'Italian Pasta',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 15,
+            rating: 4.4,
+            isFavorite: false,
+            type: 'pasta'
+        },
+        {
+            id: 9,
+            name: 'Sichuan Cocktail',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 25,
+            rating: 4.1,
+            isFavorite: false,
+            type: 'drinks'
+        },
+        {
+            id: 10,
+            name: 'Pizza Italian',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 0,
+            rating: 4.5,
+            isFavorite: false,
+            type: 'pizza'
+        },
+        {
+            id: 11,
+            name: 'California Roll',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 10,
+            rating: 4.3,
+            isFavorite: false,
+            type: 'seafood'
+        },
+        {
+            id: 12,
+            name: 'Tasty Sea Foods',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 0,
+            rating: 4.4,
+            isFavorite: false,
+            type: 'seafood'
+        },
+        {
+            id: 12,
+            name: 'Tasty Sea Foods',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 0,
+            rating: 4.4,
+            isFavorite: false,
+            type: 'seafood'
+        },
+        {
+            id: 12,
+            name: 'Tasty Sea Foods',
+            category: 'Barbecue Italian cuisine pizza',
+            price: 19.23,
+            image: '/lovable-uploads/e9cd8b1b-123f-42c9-b882-fde94f3feeb2.png',
+            discount: 0,
+            rating: 4.4,
+            isFavorite: false,
+            type: 'seafood'
+        }
+    ];
+
+    // Gallery images - গ্যালারি ছবি
+    const galleryImages = [
+        './images/allproducts/gallery-dining.jpg',
+         './images/allproducts/gallery-kitchen.jpg',
+        './images/allproducts/gallery-spread.jpg',
+        './images/allproducts',
+        './images/allproducts',
+        './images/allproducts',
+        './images/allproducts',
+        './images/allproducts'
+    ];
+
+    // Variables - ভেরিয়েবল
+    let currentPage = 1;
+    let itemsPerPage = 12;
+    let filteredItems = [...foodItems];
+    let currentCategory = 'all';
+    let currentSort = 'default';
+    let searchQuery = '';
+    let priceRange = 300;
+    let galleryCurrentIndex = 0;
+
+    // Initialize the page - পেজ শুরু করা
+    init();
+
+    function init() {
+        renderFoodCards();
+        renderPagination();
+        setupEventListeners();
+        setupGallery();
+        updateResultsCount();
+    }
+
+    // Event listeners setup - ইভেন্ট লিসেনার সেটআপ
+    function setupEventListeners() {
+        // Search functionality - সার্চ ফিচার
+        $('#searchInput').on('input', function() {
+            searchQuery = $(this).val().toLowerCase();
+            filterAndSort();
+        });
+
+        // Category filter - ক্যাটাগরি ফিল্টার
+        $('.category-item').on('click', function() {
+            $('.category-item').removeClass('active');
+            $(this).addClass('active');
+            currentCategory = $(this).data('category');
+            currentPage = 1;
+            filterAndSort();
+        });
+
+        // Sort functionality - সর্ট ফিচার
+        $('#sortSelect').on('change', function() {
+            currentSort = $(this).val();
+            filterAndSort();
+        });
+
+        // Price range filter - মূল্য পরিসর ফিল্টার
+        $('#priceRange').on('input', function() {
+            priceRange = parseInt($(this).val());
+            $('#currentPrice').text('$' + priceRange);
+        });
+
+        $('.filter-btn').on('click', function() {
+            filterAndSort();
+        });
+
+        // View mode toggle - দেখার মোড পরিবর্তন
+        $('#gridView, #listView').on('click', function() {
+            $('.view-btn').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        // Food card actions - খাবার কার্ড অ্যাকশন
+
+
+// Food card actions - খাবার কার্ড অ্যাকশন
+$(document).on('click', '.favorite-btn', function () {
+  $(this).toggleClass('active');
+  const icon = $(this).find('i');
+  if ($(this).hasClass('active')) {
+    icon.removeClass('far').addClass('fas');
+  } else {
+    icon.removeClass('fas').addClass('far');
+  }
+});
+
+$(document).on('click', '.add-to-cart', function () {
+  const foodName = $(this).closest('.food-card').find('.food-name').text();
+  showToast('Added to cart: ' + foodName);
+
+  // Optional: animate the icon
+  const icon = $(this).find('i');
+  icon.addClass('animate-pop');
+  setTimeout(() => {
+    icon.removeClass('animate-pop');
+  }, 300);
+});
+
+
+
+
+// $(document).on('click', '.favorite-btn', function() {
+        //     $(this).toggleClass('active');
+        //     const icon = $(this).find('i');
+        //     if ($(this).hasClass('active')) {
+        //         icon.removeClass('far').addClass('fas');
+        //     } else {
+        //         icon.removeClass('fas').addClass('far');
+        //     }
+        // });
+
+        // $(document).on('click', '.add-to-cart', function() {
+        //     const foodName = $(this).closest('.food-card').find('.food-name').text();
+        //     showToast('Added to cart: ' + foodName);
+        // });
+
+        // Gallery navigation - গ্যালারি নেভিগেশন
+        $('#galleryPrev').on('click', function() {
+            galleryCurrentIndex = Math.max(0, galleryCurrentIndex - 1);
+            updateGallery();
+        });
+
+        $('#galleryNext').on('click', function() {
+            const maxIndex = galleryImages.length - 4;
+            galleryCurrentIndex = Math.min(maxIndex, galleryCurrentIndex + 1);
+            updateGallery();
+        });
+
+        // Tags functionality - ট্যাগ ফিচার
+        $('.tag').on('click', function() {
+            $(this).toggleClass('active');
+        });
+    }
+
+    // Filter and sort items - আইটেম ফিল্টার এবং সর্ট করা
+    function filterAndSort() {
+        filteredItems = foodItems.filter(item => {
+            // Search filter - সার্চ ফিল্টার
+            const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                                item.category.toLowerCase().includes(searchQuery);
+            
+            // Category filter - ক্যাটাগরি ফিল্টার
+            const matchesCategory = currentCategory === 'all' || 
+                                  item.type === currentCategory;
+            
+            // Price filter - মূল্য ফিল্টার
+            const matchesPrice = item.price <= priceRange;
+            
+            return matchesSearch && matchesCategory && matchesPrice;
+        });
+
+        // Sort items - আইটেম সর্ট করা
+        switch(currentSort) {
+            case 'name':
+                filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'price-low':
+                filteredItems.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-high':
+                filteredItems.sort((a, b) => b.price - a.price);
+                break;
+            case 'rating':
+                filteredItems.sort((a, b) => b.rating - a.rating);
+                break;
+            default:
+                break;
+        }
+
+        currentPage = 1;
+        renderFoodCards();
+        renderPagination();
+        updateResultsCount();
+    }
+
+    // Render food cards - খাবার কার্ড রেন্ডার করা
+    function renderFoodCards() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const currentItems = filteredItems.slice(startIndex, endIndex);
+        
+        const grid = $('#foodGrid');
+        grid.empty();
+
+        if (currentItems.length === 0) {
+            grid.html('<div class="col-12 text-center py-5"><h4>No items found matching your criteria.</h4></div>');
+            return;
+        }
+
+        currentItems.forEach(item => {
+            const card = createFoodCard(item);
+            grid.append(card);
+        });
+    }
+
+    // Create food card HTML - খাবার কার্ড HTML তৈরি করা
+    function createFoodCard(item) {
+        const discountBadge = item.discount > 0 ? 
+            `<div class="discount-badge">${item.discount}%</div>` : '';
+        
+        const stars = generateStars(item.rating);
+        
+        return `
+            <div class="food-card" data-id="${item.id}">
+                <div class="food-card-image">
+                    <img src="${item.image}" alt="${item.name}">
+                    ${discountBadge}
+                    <div class="food-actions">
+                        <button class="action-btn favorite-btn ${item.isFavorite ? 'active' : ''}">
+                            <i class="${item.isFavorite ? 'fas' : 'far'} fa-heart"></i>
+                        </button>
+                        <button class="action-btn cart-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="food-card-content">
+                    <div class="food-rating">
+                        <div class="stars">${stars}</div>
+                        <span class="rating-text">(${item.rating})</span>
+                    </div>
+                    <h3 class="food-name">${item.name}</h3>
+                    <p class="food-category">${item.category}</p>
+                    <div class="food-price">$${item.price.toFixed(2)}</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Generate star rating - তারকা রেটিং তৈরি করা
+    function generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 !== 0;
+        let stars = '';
+        
+        for (let i = 0; i < fullStars; i++) {
+            stars += '<i class="fas fa-star"></i>';
+        }
+        
+        if (halfStar) {
+            stars += '<i class="fas fa-star-half-alt"></i>';
+        }
+        
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        for (let i = 0; i < emptyStars; i++) {
+            stars += '<i class="far fa-star"></i>';
+        }
+        
+        return stars;
+    }
+
+    // Render pagination - পেজিনেশন রেন্ডার করা
+    function renderPagination() {
+        const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+        const pagination = $('#pagination');
+        pagination.empty();
+
+        if (totalPages <= 1) return;
+
+        // Previous button - পূর্ববর্তী বোতাম
+        const prevDisabled = currentPage === 1 ? 'disabled' : '';
+        pagination.append(`
+            <li class="page-item ${prevDisabled}">
+                <a class="page-link" href="#" data-page="${currentPage - 1}">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+        `);
+
+        // Page numbers - পেজ নম্বর
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPages, currentPage + 2);
+
+        for (let i = startPage; i <= endPage; i++) {
+            const active = i === currentPage ? 'active' : '';
+            pagination.append(`
+                <li class="page-item ${active}">
+                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                </li>
+            `);
+        }
+
+        // Next button - পরবর্তী বোতাম
+        const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+        pagination.append(`
+            <li class="page-item ${nextDisabled}">
+                <a class="page-link" href="#" data-page="${currentPage + 1}">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        `);
+
+        // Pagination click handler - পেজিনেশন ক্লিক হ্যান্ডলার
+        pagination.on('click', '.page-link', function(e) {
+            e.preventDefault();
+            const page = parseInt($(this).data('page'));
+            if (page && page !== currentPage && page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderFoodCards();
+                renderPagination();
+                updateResultsCount();
+                $('html, body').animate({ scrollTop: 0 }, 500);
+            }
+        });
+    }
+
+    // Update results count - ফলাফল সংখ্যা আপডেট করা
+    function updateResultsCount() {
+        const startIndex = (currentPage - 1) * itemsPerPage + 1;
+        const endIndex = Math.min(currentPage * itemsPerPage, filteredItems.length);
+        const total = filteredItems.length;
+        
+        $('#resultsCount').text(`Showing ${startIndex}-${endIndex} of ${total} results`);
+    }
+
+    // Setup gallery - গ্যালারি সেটআপ করা
+    function setupGallery() {
+        const track = $('#galleryTrack');
+        track.empty();
+        
+        galleryImages.forEach((image, index) => {
+            track.append(`
+                <div class="gallery-item">
+                    <img src="${image}" alt="Gallery Image ${index + 1}" class="gallery-image">
+                </div>
+            `);
+        });
+        
+        updateGallery();
+    }
+
+    // Update gallery position - গ্যালারি অবস্থান আপডেট করা
+    function updateGallery() {
+        const track = $('#galleryTrack');
+        const translateX = -(galleryCurrentIndex * 25);
+        track.css('transform', `translateX(${translateX}%)`);
+    }
+
+    // Show toast notification - টোস্ট বিজ্ঞপ্তি দেখানো
+    function showToast(message) {
+        // Create toast element - টোস্ট এলিমেন্ট তৈরি করা
+        const toast = $(`
+            <div class="toast-notification">
+                <div class="toast-content">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                </div>
+            </div>
+        `);
+        
+        // Add toast styles - টোস্ট স্টাইল যোগ করা
+        toast.css({
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            background: '#dc3545',
+            color: '#fff',
+            padding: '15px 20px',
+            borderRadius: '8px',
+            zIndex: 9999,
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+            transform: 'translateX(100%)',
+            transition: 'transform 0.3s ease'
+        });
+        
+        $('body').append(toast);
+        
+        // Animate in - অ্যানিমেশন ইন
+        setTimeout(() => {
+            toast.css('transform', 'translateX(0)');
+        }, 100);
+        
+        // Remove after 3 seconds - 3 সেকেন্ড পরে সরানো
+        setTimeout(() => {
+            toast.css('transform', 'translateX(100%)');
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    // Smooth scrolling for anchor links - অ্যাংকর লিঙ্কের জন্য স্মুথ স্ক্রলিং
+    $('a[href^="#"]').on('click', function(e) {
+        e.preventDefault();
+        const target = $($(this).attr('href'));
+        if (target.length) {
+            $('html, body').animate({
+                scrollTop: target.offset().top - 100
+            }, 500);
+        }
+    });
+
+    // Mobile menu toggle - মোবাইল মেনু টগল
+    $('.mobile-menu-toggle').on('click', function() {
+        $('.sidebar').toggleClass('show');
+    });
+
+    // Close mobile menu when clicking outside - বাইরে ক্লিক করলে মোবাইল মেনু বন্ধ করা
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.sidebar, .mobile-menu-toggle').length) {
+            $('.sidebar').removeClass('show');
+        }
+    });
+
+    // Lazy loading for images - ছবির জন্য লেজি লোডিং
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+
+    // Auto-slide gallery - অটো-স্লাইড গ্যালারি
+    let autoSlideInterval;
+    
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            const maxIndex = galleryImages.length - 4;
+            galleryCurrentIndex = galleryCurrentIndex >= maxIndex ? 0 : galleryCurrentIndex + 1;
+            updateGallery();
+        }, 4000);
+    }
+    
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+    
+    // Start auto-slide on page load - পেজ লোড হলে অটো-স্লাইড শুরু করা
+    startAutoSlide();
+    
+    // Pause auto-slide on hover - হোভার করলে অটো-স্লাইড বন্ধ করা
+    $('.food-gallery').on('mouseenter', stopAutoSlide);
+    $('.food-gallery').on('mouseleave', startAutoSlide);
+
+});
+
+// Loading animation - লোডিং অ্যানিমেশন
+$(window).on('load', function() {
+    $('.loader').fadeOut(500);
+});
+
+// Scroll to top button - উপরে স্ক্রল করার বোতাম
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+        $('#scrollToTop').fadeIn();
+    } else {
+        $('#scrollToTop').fadeOut();
+    }
+});
+
+$('#scrollToTop').on('click', function() {
+    $('html, body').animate({ scrollTop: 0 }, 600);
+    return false;
+});
+    </script>
+</body>
+</html>
