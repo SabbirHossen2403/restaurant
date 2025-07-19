@@ -56,7 +56,7 @@
         // Countdown timer
         function updateCountdown() {
             const now = new Date().getTime();
-            const targetDate = new Date('2024-12-31 23:59:59').getTime();
+            const targetDate = new Date('2028-12-31 23:59:59').getTime();
             const distance = targetDate - now;
 
             if (distance > 0) {
@@ -81,8 +81,10 @@
             dots: true,
             infinite: true,
             speed: 300,
-            slidesToShow: 2,
+            slidesToShow: 3,
             slidesToScroll: 1,
+            prevArrow: '<button class="prev-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>',
+            nextArrow: '<button class="next-arrow"><i class="fa-solid fa-arrow-right fa-lg"></i></button>',
             autoplay: true,
             autoplaySpeed: 5000,
             responsive: [

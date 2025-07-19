@@ -981,12 +981,26 @@ h2::after {
     animation: pulse 0.5s ease;
 }
 
+#shwoall{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #000;
+    width: fit-content;
+    font-weight: 600;
+}
+
+#shwoall:hover{
+    color: var(--light-color2);
+}
 
 
-
-
-
-
+#shwoall i{
+    margin-top: 3px;
+}
 
 
 
@@ -1115,6 +1129,29 @@ h2::after {
     color: var(--muted-foreground);
     font-size: 0.9rem;
 }
+
+
+#testimonials .slick-dots li button{
+    background-color: var(--primary-color2);
+    
+}
+#testimonials .slick-dots .slick-active button{
+    background: var(--primary-color2);
+}
+
+
+#testimonials  .prev-arrow{
+    left: -40px;
+}
+#testimonials .slick-arrow{
+    background-color: var(--primary-color2);
+
+}
+
+#testimonials .next-arrow{
+    right: -40px;
+}
+
 
 /* Contact Section */
 .contact-section {
