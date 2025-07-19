@@ -326,7 +326,13 @@
             $('#cartSidebar').removeClass('open');
             $('#cartOverlay').removeClass('active');
         });
-        
+
+        // Open cart sidebar when cart-summary is clicked
+$('#cartSummary').click(function () {
+  $('#cartSidebar').addClass('open');
+  $('#cartOverlay').addClass('active');
+});
+
         // Add to cart functionality
         $('.add-to-cart').click(function() {
             const id = $(this).data('id');
@@ -351,6 +357,7 @@
             
             updateCart();
             
+
             // Animate cart badge
             $('#cartBadge').addClass('bounce');
             setTimeout(() => {
@@ -427,9 +434,14 @@
             const tax = subtotal * 0.10; // 10% tax
             const total = subtotal + tax;
             
-            $('#cartSubtotal').text('$' + subtotal.toFixed(2));
-            $('#cartTax').text('$' + tax.toFixed(2));
-            $('#cartTotal').text('$' + total.toFixed(2));
+$('#cartSubtotal').text('$' + subtotal.toFixed(2));
+$('#cartTax').text('$' + tax.toFixed(2));
+$('#cartTotal').text('$' + total.toFixed(2));
+
+// 👇 New: update mini summary
+$('#cartCount').text(totalItems);
+$('#cartTotalMini').text('$' + total.toFixed(2));
+
         }
         
         // Handle quantity changes and item removal
