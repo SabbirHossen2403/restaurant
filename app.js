@@ -334,54 +334,54 @@ $('#cartSummary').click(function () {
 });
 
         // Add to cart functionality
-        $('.add-to-cart').click(function() {
-            const id = $(this).data('id');
-            const name = $(this).data('name');
-            const price = parseFloat($(this).data('price'));
-            const img = $(this).data('img');
-            
-            // Check if item already exists in cart
-            const existingItem = cart.find(item => item.id === id);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id,
-                    name,
-                    price,
-                    img,
-                    quantity: 1
-                });
-            }
-            
-            updateCart();
-            
-
-            // Animate cart badge
-            $('#cartBadge').addClass('bounce');
-            setTimeout(() => {
-                $('#cartBadge').removeClass('bounce');
-            }, 500);
-            
-            // Show success message
-            const toast = `<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-success text-white">
-                        <strong class="me-auto">Added to cart</strong>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        ${name} has been added to your cart
-                    </div>
-                </div>
-            </div>`;
-            
-            $('body').append(toast);
-            setTimeout(() => {
-                $('.toast').remove();
-            }, 3000);
+$('.add-to-cart').click(function() {
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+    const price = parseFloat($(this).data('price'));
+    const img = $(this).data('img');
+    
+    // Check if item already exists in cart
+    const existingItem = cart.find(item => item.id === id);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id,
+            name,
+            price,
+            img,
+            quantity: 1
         });
+    }
+
+    updateCart();
+
+    // Animate cart badge
+    $('#cartBadge').addClass('bounce');
+    setTimeout(() => {
+        $('#cartBadge').removeClass('bounce');
+    }, 500);
+
+    // ✅ Show success toast using SweetAlert2
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+
+    Toast.fire({
+        icon: "success",
+        title: `${name} has been added to your cart`
+    });
+});
+
         
         // Update cart display
         function updateCart() {
